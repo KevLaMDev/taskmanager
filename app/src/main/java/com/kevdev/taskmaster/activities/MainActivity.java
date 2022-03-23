@@ -9,6 +9,8 @@ import android.widget.Button;
 
 import com.kevdev.taskmaster.R;
 
+//import com.kevdev.taskmaster.R;
+
 public class MainActivity extends AppCompatActivity {
 
     @Override
@@ -24,7 +26,7 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 // define on click callback
-                Intent goToAddTaskActivity = new Intent(MainActivity.this, AllTasks.class);
+                Intent goToAddTaskActivity = new Intent(MainActivity.this, AddTask.class);
                 startActivity(goToAddTaskActivity);
             }
         });
