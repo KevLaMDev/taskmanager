@@ -19,3 +19,9 @@
       ![New home screen](screenshots/Screenshot3.png)
       ![Task Details page](screenshots/Screenshot4.png)
       
+- 3/23: 
+    - Changed home page of app: now has a recycler view list of tasks which are currently hard coded in.
+    - Each task on the recycler list takes the user to the Task Details activity, passing the name of the task
+    - Added a Task object with an enum property to represent the completion status of tasks
+    - Screenshots:
+     ![New Home screen](screenshots/Screenshot5.png)
