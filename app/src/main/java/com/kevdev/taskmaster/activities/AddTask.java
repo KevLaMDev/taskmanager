@@ -8,9 +8,13 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 
+import com.kevdev.taskmaster.Model.Task;
 import com.kevdev.taskmaster.R;
+import com.kevdev.taskmaster.database.TaskmasterDatabase;
 
 public class AddTask extends AppCompatActivity {
+
+    TaskmasterDatabase taskmasterDatabase;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -23,7 +27,12 @@ public class AddTask extends AppCompatActivity {
         submitButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                confirmation.setText("submitted!");
+                EditText taskTitleEditText = (EditText) findViewById(R.id.taskTitle);
+                String taskTitle = taskTitleEditText.getText().toString();
+                EditText taskBodyEditText = (EditText) findViewById(R.id.taskBody);
+                String taskBody = taskBodyEditText.getText().toString();
+                Task newTask = new Task(taskTitle, taskBody);
+                taskmasterDatabase.taskDAO().insertATask(newTask);
             }
         });
     }
