@@ -41,7 +41,7 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="68dp"
         android:layout_marginEnd="114dp"
-        android:layout_marginBottom="204dp"
+        android:layout_marginBottom="208dp"
         android:ems="10"
         android:inputType="textPersonName"
         android:text="Task Description"
