@@ -10,15 +10,14 @@
         android:id="@+id/mainPageHeader"
         android:layout_width="143dp"
         android:layout_height="52dp"
-        android:layout_marginStart="36dp"
-        android:layout_marginTop="80dp"
-        android:layout_marginEnd="214dp"
+        android:layout_marginStart="38dp"
+        android:layout_marginEnd="212dp"
+        android:layout_marginBottom="52dp"
         android:text="@string/my_tasks"
         android:textSize="24sp"
+        app:layout_constraintBottom_toTopOf="@+id/mainPageRecycleView"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintStart_toStartOf="parent" />
 
     <ImageButton
         android:id="@+id/settingsNavButton"
@@ -32,17 +31,15 @@
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/mainPageRecycleView"
-        android:layout_width="216dp"
-        android:layout_height="99dp"
+        android:layout_width="215dp"
+        android:layout_height="324dp"
         android:layout_marginStart="88dp"
-        android:layout_marginTop="58dp"
         android:layout_marginEnd="94dp"
-        android:layout_marginBottom="72dp"
+        android:layout_marginBottom="56dp"
         app:layout_constraintBottom_toTopOf="@+id/addTaskNavButton"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/mainPageHeader" />
+        app:layout_constraintStart_toStartOf="parent" />
 
     <Button
         android:id="@+id/addTaskNavButton"
@@ -50,7 +47,7 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="36dp"
         android:layout_marginEnd="248dp"
-        android:layout_marginBottom="420dp"
+        android:layout_marginBottom="96dp"
         android:text="ADD TASK"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"

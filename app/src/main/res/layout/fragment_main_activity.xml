@@ -9,8 +9,9 @@
 
     <TextView
         android:id="@+id/mainActivityRecyclerViewFragment"
-        android:layout_width="215dp"
-        android:layout_height="29dp"
-        android:text="@string/hello_blank_fragment" />
+        android:layout_width="match_parent"
+        android:layout_height="55dp"
+        android:text="@string/hello_blank_fragment"
+        android:textSize="20sp" />
 
 </FrameLayout>

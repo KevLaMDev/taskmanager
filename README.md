@@ -25,3 +25,6 @@
     - Added a Task object with an enum property to represent the completion status of tasks
     - Screenshots:
      ![New Home screen](screenshots/Screenshot5.png)
+      
+- 3/24:
+    - Added sqlite database to persist data

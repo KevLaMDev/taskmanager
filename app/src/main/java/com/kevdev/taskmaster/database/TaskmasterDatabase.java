@@ -6,7 +6,7 @@ import androidx.room.RoomDatabase;
 import com.kevdev.taskmaster.Model.Task;
 import com.kevdev.taskmaster.dao.TaskDAO;
 
-@Database(entities = {Task.class}, version = 2)
+@Database(entities = {Task.class}, version = 3)
 public abstract class TaskmasterDatabase extends RoomDatabase {
 
     public abstract TaskDAO taskDAO();

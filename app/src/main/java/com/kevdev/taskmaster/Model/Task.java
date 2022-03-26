@@ -26,7 +26,7 @@ public class Task {
 
         public static State fromString(String inputState) {
             for (State taskState : State.values()) {
-                if (taskState.equals(inputState)) return taskState;
+                if (taskState.state.equals(inputState)) return taskState;
             }
             return null;
         }
