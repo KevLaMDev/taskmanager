@@ -38,9 +38,8 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
         preferences = PreferenceManager.getDefaultSharedPreferences(this);
-        taskmasterDatabase = Room.databaseBuilder(getApplicationContext(), TaskmasterDatabase.class, "task_master").allowMainThreadQueries().build();
-//        List<Task> tasks = taskmasterDatabase.taskDAO().findAll();
-
+        taskmasterDatabase = Room.databaseBuilder(getApplicationContext(), TaskmasterDatabase.class, "task_master").allowMainThreadQueries().fallbackToDestructiveMigration().build();
+        tasks = taskmasterDatabase.taskDAO().findAll();
         // Get component ID
         ImageButton settingsButton = (ImageButton) findViewById(R.id.settingsNavButton);
 
@@ -74,7 +73,9 @@ public class MainActivity extends AppCompatActivity {
 
         String username = preferences.getString(Settings.USERNAME_TAG, "");
         TextView mainPageHeader = findViewById(R.id.mainPageHeader);
+        setUpMainActivityRecyclerView();
         mainPageHeader.setText(username + "\'s tasks");
+        tasks = taskmasterDatabase.taskDAO().findAll();
     }
 
 
@@ -87,11 +88,10 @@ public class MainActivity extends AppCompatActivity {
         mainActivityRecyclerView.setLayoutManager(layoutManager);
         // Step 1C: Create adapter class and import as global instance var
         List<Task> defaultTasks = new ArrayList<>();
-
         defaultTasks.add(new Task("Clean Dishes", "No dishes left pls do asap", Task.State.NEW));
         defaultTasks.add(new Task("Grind leetcode", "It's gonna suck but you gotta do it", Task.State.NEW));
         defaultTasks.add(new Task("test", "test", Task.State.NEW));
-        adapter = new MainActivityRecyclerViewAdapter(defaultTasks, this);
+        adapter = new MainActivityRecyclerViewAdapter(tasks, this);
         // set adapter on recyclerView UI element
         mainActivityRecyclerView.setAdapter(adapter);
     }
