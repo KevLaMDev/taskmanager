@@ -27,6 +27,7 @@ import java.util.List;
 
 public class MainActivity extends AppCompatActivity {
     public static final String TASK_NAME_EXTRA_TAG = "taskName";
+    public static final String TASK_BODY_EXTRA_TAG = "taskBody";
     SharedPreferences preferences;
     MainActivityRecyclerViewAdapter adapter;
     TaskmasterDatabase taskmasterDatabase;
