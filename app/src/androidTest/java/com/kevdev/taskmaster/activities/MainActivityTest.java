@@ -4,6 +4,9 @@ package com.kevdev.taskmaster.activities;
 import static androidx.test.espresso.Espresso.onView;
 import static androidx.test.espresso.Espresso.pressBack;
 import static androidx.test.espresso.action.ViewActions.click;
+import static androidx.test.espresso.action.ViewActions.closeSoftKeyboard;
+import static androidx.test.espresso.action.ViewActions.pressImeActionButton;
+import static androidx.test.espresso.action.ViewActions.replaceText;
 import static androidx.test.espresso.assertion.ViewAssertions.matches;
 import static androidx.test.espresso.matcher.ViewMatchers.isDisplayed;
 import static androidx.test.espresso.matcher.ViewMatchers.withId;
@@ -38,63 +41,63 @@ public class MainActivityTest {
 
     @Test
     public void mainActivityTest() {
-        ViewInteraction materialButton = onView(
-                allOf(withId(R.id.task1NavButton), withText("TASK 1"),
-                        childAtPosition(
-                                childAtPosition(
-                                        withId(android.R.id.content),
-                                        0),
-                                0),
-                        isDisplayed()));
-        materialButton.perform(click());
-
-        ViewInteraction textView = onView(
-                allOf(withId(R.id.taskDetailHeader), withText("Task 1"),
-                        withParent(withParent(withId(android.R.id.content))),
-                        isDisplayed()));
-        textView.check(matches(withText("Task 1")));
-
-        pressBack();
-
-        ViewInteraction materialButton2 = onView(
-                allOf(withId(R.id.task2NavButton), withText("TASK 2"),
+        ViewInteraction appCompatImageButton = onView(
+                allOf(withId(R.id.settingsNavButton),
                         childAtPosition(
                                 childAtPosition(
                                         withId(android.R.id.content),
                                         0),
                                 1),
                         isDisplayed()));
-        materialButton2.perform(click());
+        appCompatImageButton.perform(click());
 
-        ViewInteraction textView2 = onView(
-                allOf(withId(R.id.taskDetailHeader), withText("Task 2"),
-                        withParent(withParent(withId(android.R.id.content))),
-                        isDisplayed()));
-        textView2.check(matches(withText("Task 2")));
-
-        ViewInteraction textView3 = onView(
-                allOf(withId(R.id.taskDetailHeader), withText("Task 2"),
-                        withParent(withParent(withId(android.R.id.content))),
-                        isDisplayed()));
-        textView3.check(matches(withText("Task 2")));
-
-        pressBack();
-
-        ViewInteraction materialButton3 = onView(
-                allOf(withId(R.id.task3NavButton), withText("Task 3"),
+        ViewInteraction appCompatEditText = onView(
+                allOf(withId(R.id.textEditUsername), withText("Enter Your Username"),
                         childAtPosition(
                                 childAtPosition(
                                         withId(android.R.id.content),
                                         0),
-                                4),
+                                0),
                         isDisplayed()));
-        materialButton3.perform(click());
+        appCompatEditText.perform(replaceText("user"));
 
-        ViewInteraction textView4 = onView(
-                allOf(withId(R.id.taskDetailHeader), withText("Task 3"),
+        ViewInteraction appCompatEditText2 = onView(
+                allOf(withId(R.id.textEditUsername), withText("user"),
+                        childAtPosition(
+                                childAtPosition(
+                                        withId(android.R.id.content),
+                                        0),
+                                0),
+                        isDisplayed()));
+        appCompatEditText2.perform(closeSoftKeyboard());
+
+        ViewInteraction materialButton = onView(
+                allOf(withId(R.id.usernameSubmitButton), withText("Save"),
+                        childAtPosition(
+                                childAtPosition(
+                                        withId(android.R.id.content),
+                                        0),
+                                2),
+                        isDisplayed()));
+        materialButton.perform(click());
+
+        ViewInteraction appCompatEditText3 = onView(
+                allOf(withId(R.id.textEditUsername), withText("user"),
+                        childAtPosition(
+                                childAtPosition(
+                                        withId(android.R.id.content),
+                                        0),
+                                0),
+                        isDisplayed()));
+        appCompatEditText3.perform(pressImeActionButton());
+
+        pressBack();
+
+        ViewInteraction textView = onView(
+                allOf(withId(R.id.mainPageHeader), withText("user's tasks"),
                         withParent(withParent(withId(android.R.id.content))),
                         isDisplayed()));
-        textView4.check(matches(withText("Task 3")));
+        textView.check(matches(withText("user's tasks")));
     }
 
     private static Matcher<View> childAtPosition(
