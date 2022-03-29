@@ -17,10 +17,14 @@ public class TaskDetail extends AppCompatActivity {
         // Access data passed via intent
         Intent passedData = getIntent();
         String taskName;
+        String taskBody;
         if (passedData != null) {
             taskName = passedData.getStringExtra(MainActivity.TASK_NAME_EXTRA_TAG);
             TextView titleTextView = (TextView) findViewById(R.id.taskDetailHeader);
             titleTextView.setText(taskName);
+            taskBody = passedData.getStringExtra(MainActivity.TASK_BODY_EXTRA_TAG);
+            TextView bodyTextView = (TextView) findViewById(R.id.taskDetailDescription);
+            bodyTextView.setText(taskBody);
         }
     }
 }

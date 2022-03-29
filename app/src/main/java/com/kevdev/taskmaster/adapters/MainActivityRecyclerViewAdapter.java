@@ -23,6 +23,7 @@ public class MainActivityRecyclerViewAdapter extends RecyclerView.Adapter
     List<Task> tasks;
     Context callingActivity;
     public static final String TASK_NAME_EXTRA_TAG = "taskName";
+    public static final String TASK_BODY_EXTRA_TAG = "taskBody";
 
     public MainActivityRecyclerViewAdapter() {}
 
@@ -46,11 +47,13 @@ public class MainActivityRecyclerViewAdapter extends RecyclerView.Adapter
     public void onBindViewHolder(@NonNull RecyclerView.ViewHolder holder, int position) {
         TextView taskFragmentTextView = (TextView) holder.itemView.findViewById(R.id.mainActivityRecyclerViewFragment);
         String taskName = tasks.get(position).getTitle();
+        String taskBody = tasks.get(position).getBody();
         taskFragmentTextView.setText(taskName);
         View TaskViewHolder = holder.itemView;
         TaskViewHolder.setOnClickListener(view -> {
             Intent goToTaskDetail = new Intent(callingActivity, TaskDetail.class);
             goToTaskDetail.putExtra(TASK_NAME_EXTRA_TAG, taskName);
+            goToTaskDetail.putExtra(TASK_BODY_EXTRA_TAG, taskBody);
             callingActivity.startActivity(goToTaskDetail);
         });
     }
