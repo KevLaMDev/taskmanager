@@ -10,10 +10,9 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.kevdev.taskmaster.Model.Task;
+import com.kevdev.taskmaster.model.Task;
 import com.kevdev.taskmaster.R;
 import com.kevdev.taskmaster.activities.TaskDetail;
-import com.kevdev.taskmaster.fragments.MainActivityFragment;
 
 import java.util.List;
 

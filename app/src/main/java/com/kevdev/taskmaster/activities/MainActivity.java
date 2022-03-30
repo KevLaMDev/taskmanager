@@ -1,10 +1,5 @@
 package com.kevdev.taskmaster.activities;
 
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
-import androidx.room.Room;
-
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
@@ -14,12 +9,15 @@ import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.TextView;
 
-import com.kevdev.taskmaster.Model.Task;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
+
+import com.kevdev.taskmaster.enums.State;
+import com.kevdev.taskmaster.model.Task;
 import com.kevdev.taskmaster.R;
 import com.kevdev.taskmaster.adapters.MainActivityRecyclerViewAdapter;
-import com.kevdev.taskmaster.database.TaskmasterDatabase;
 
-import java.sql.Array;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -30,7 +28,7 @@ public class MainActivity extends AppCompatActivity {
     public static final String TASK_BODY_EXTRA_TAG = "taskBody";
     SharedPreferences preferences;
     MainActivityRecyclerViewAdapter adapter;
-    TaskmasterDatabase taskmasterDatabase;
+
     List<Task> tasks = null;
 
     @Override
@@ -39,8 +37,8 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
         preferences = PreferenceManager.getDefaultSharedPreferences(this);
-        taskmasterDatabase = Room.databaseBuilder(getApplicationContext(), TaskmasterDatabase.class, "task_master").allowMainThreadQueries().fallbackToDestructiveMigration().build();
-        tasks = taskmasterDatabase.taskDAO().findAll();
+        //TODO convert to dynamo query
+//        tasks = taskmasterDatabase.taskDAO().findAll();
         // Get component ID
         ImageButton settingsButton = (ImageButton) findViewById(R.id.settingsNavButton);
 
@@ -76,10 +74,9 @@ public class MainActivity extends AppCompatActivity {
         TextView mainPageHeader = findViewById(R.id.mainPageHeader);
         setUpMainActivityRecyclerView();
         mainPageHeader.setText(username + "\'s tasks");
-        tasks = taskmasterDatabase.taskDAO().findAll();
+        //TODO convert to Dynamo query
+//        tasks = taskmasterDatabase.taskDAO().findAll();
     }
-
-
 
     private void setUpMainActivityRecyclerView() {
         // Step 1A: Get recycler by Id
@@ -89,10 +86,10 @@ public class MainActivity extends AppCompatActivity {
         mainActivityRecyclerView.setLayoutManager(layoutManager);
         // Step 1C: Create adapter class and import as global instance var
         List<Task> defaultTasks = new ArrayList<>();
-        defaultTasks.add(new Task("Clean Dishes", "No dishes left pls do asap", Task.State.NEW));
-        defaultTasks.add(new Task("Grind leetcode", "It's gonna suck but you gotta do it", Task.State.NEW));
-        defaultTasks.add(new Task("test", "test", Task.State.NEW));
-        adapter = new MainActivityRecyclerViewAdapter(tasks, this);
+        defaultTasks.add(new Task("Clean Dishes", "No dishes left pls do asap", State.NEW));
+        defaultTasks.add(new Task("Grind leetcode", "It's gonna suck but you gotta do it", State.NEW));
+        defaultTasks.add(new Task("test", "test", State.NEW));
+        adapter = new MainActivityRecyclerViewAdapter(defaultTasks, this);
         // set adapter on recyclerView UI element
         mainActivityRecyclerView.setAdapter(adapter);
     }

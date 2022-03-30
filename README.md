@@ -28,3 +28,7 @@
       
 - 3/24:
     - Added sqlite database to persist data
+    
+- 3/29:
+    - Removed Room DB and added AWS amplify
+    

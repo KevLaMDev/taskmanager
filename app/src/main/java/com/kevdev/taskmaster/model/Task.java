@@ -1,46 +1,18 @@
-package com.kevdev.taskmaster.Model;
+package com.kevdev.taskmaster.model;
 
 
 import androidx.annotation.NonNull;
-import androidx.room.Entity;
-import androidx.room.PrimaryKey;
 
-@Entity
+import com.kevdev.taskmaster.enums.State;
+
 public class Task {
-    @PrimaryKey(autoGenerate = true)
+
     public Long id;
     String title;
     String body;
-    public  State taskState;
+    public State taskState;
 
-    public enum State {
-        NEW("New"),
-        ASSIGNED("Assigned"),
-        COMPLETE("Complete");
 
-        String state;
-
-        State(String s){
-            state = s;
-        }
-
-        public static State fromString(String inputState) {
-            for (State taskState : State.values()) {
-                if (taskState.state.equals(inputState)) return taskState;
-            }
-            return null;
-        }
-
-        @NonNull
-        @Override
-        public String toString() {
-            if (state == null) {
-                return "";
-            }
-            return state;
-        }
-
-    }
 
     public Task(String title, String body, State s) {
         this.title = title;
