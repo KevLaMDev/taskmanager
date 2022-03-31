@@ -10,7 +10,8 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.kevdev.taskmaster.model.Task;
+
+import com.amplifyframework.datastore.generated.model.Task;
 import com.kevdev.taskmaster.R;
 import com.kevdev.taskmaster.activities.TaskDetail;
 

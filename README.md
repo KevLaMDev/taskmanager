@@ -32,3 +32,5 @@
 - 3/29:
     - Removed Room DB and added AWS amplify
     
+- 3/31:
+    - Added team model with appropriate relationship to task models

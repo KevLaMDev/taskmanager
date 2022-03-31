@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageButton;
@@ -13,23 +14,25 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.kevdev.taskmaster.enums.State;
-import com.kevdev.taskmaster.model.Task;
+import com.amplifyframework.api.graphql.model.ModelMutation;
+import com.amplifyframework.api.graphql.model.ModelQuery;
+import com.amplifyframework.core.Amplify;
+import com.amplifyframework.datastore.generated.model.Task;
 import com.kevdev.taskmaster.R;
 import com.kevdev.taskmaster.adapters.MainActivityRecyclerViewAdapter;
 
 import java.util.ArrayList;
 import java.util.List;
 
-//import com.kevdev.taskmaster.R;
 
 public class MainActivity extends AppCompatActivity {
     public static final String TASK_NAME_EXTRA_TAG = "taskName";
     public static final String TASK_BODY_EXTRA_TAG = "taskBody";
+    public static final String TAG = "MainActivity";
     SharedPreferences preferences;
     MainActivityRecyclerViewAdapter adapter;
+    List<Task> tasks = new ArrayList<>();
 
-    List<Task> tasks = null;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -37,11 +40,19 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
         preferences = PreferenceManager.getDefaultSharedPreferences(this);
-        //TODO convert to dynamo query
-//        tasks = taskmasterDatabase.taskDAO().findAll();
         // Get component ID
         ImageButton settingsButton = (ImageButton) findViewById(R.id.settingsNavButton);
-
+        // DB proof of life:
+//        com.amplifyframework.datastore.generated.model.Task testTask =
+//                com.amplifyframework.datastore.generated.model.Task.builder()
+//                    .title("test task")
+//                    .body("test body")
+//                    .taskState(com.amplifyframework.datastore.generated.model.State.NEW)
+//                    .build();
+//        Amplify.API.mutate(ModelMutation.create(testTask),
+//                    successResponse -> Log.i(TAG, "MainActivity.onCreate(): made a task successfully"),
+//                    failureResponse -> Log.i(TAG, "MainActivity.onCreate(): failed with " + failureResponse)
+//                );
         // Set OnClickListener
         settingsButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -50,6 +61,7 @@ public class MainActivity extends AppCompatActivity {
                 startActivity(goToTaskDetail);
             }
         });
+
         setUpMainActivityRecyclerView();
         setUpAddTaskActivity();
     }
@@ -72,10 +84,24 @@ public class MainActivity extends AppCompatActivity {
 
         String username = preferences.getString(Settings.USERNAME_TAG, "");
         TextView mainPageHeader = findViewById(R.id.mainPageHeader);
+        List<Task> dbTasks = new ArrayList<>();
+        Amplify.API.query(
+                ModelQuery.list(Task.class),
+                success -> {
+                    Log.i(TAG, "successful READ of tasks from DB");
+                    for (Task dbTask : success.getData()) {
+                        dbTasks.add(dbTask);
+                    }
+                    tasks = dbTasks;
+                    runOnUiThread(() ->
+                    {
+                        adapter.notifyDataSetChanged();
+                    });
+                },
+                failure -> Log.i(TAG, "failure to READ tasks from DB")
+        );
         setUpMainActivityRecyclerView();
         mainPageHeader.setText(username + "\'s tasks");
-        //TODO convert to Dynamo query
-//        tasks = taskmasterDatabase.taskDAO().findAll();
     }
 
     private void setUpMainActivityRecyclerView() {
@@ -85,11 +111,7 @@ public class MainActivity extends AppCompatActivity {
         RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(this);
         mainActivityRecyclerView.setLayoutManager(layoutManager);
         // Step 1C: Create adapter class and import as global instance var
-        List<Task> defaultTasks = new ArrayList<>();
-        defaultTasks.add(new Task("Clean Dishes", "No dishes left pls do asap", State.NEW));
-        defaultTasks.add(new Task("Grind leetcode", "It's gonna suck but you gotta do it", State.NEW));
-        defaultTasks.add(new Task("test", "test", State.NEW));
-        adapter = new MainActivityRecyclerViewAdapter(defaultTasks, this);
+        adapter = new MainActivityRecyclerViewAdapter(tasks, this);
         // set adapter on recyclerView UI element
         mainActivityRecyclerView.setAdapter(adapter);
     }
