@@ -34,3 +34,7 @@
     
 - 3/31:
     - Added team model with appropriate relationship to task models
+    
+-4/5: 
+    - Added team spinner in both settings and task creation activities to allow users to select a particular team to both filter and assign tasks.
+    ![Filtered Tasks](screenshots/Screenshot_20220405_210246.png)
