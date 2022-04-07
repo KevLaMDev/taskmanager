@@ -8,35 +8,28 @@ import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Spinner;
-import android.widget.TextView;
-
 import androidx.appcompat.app.AppCompatActivity;
-
 import com.amplifyframework.api.graphql.model.ModelMutation;
 import com.amplifyframework.api.graphql.model.ModelQuery;
 import com.amplifyframework.core.Amplify;
 import com.amplifyframework.datastore.generated.model.State;
 import com.amplifyframework.datastore.generated.model.Task;
 import com.amplifyframework.datastore.generated.model.Team;
-import com.amplifyframework.datastore.syncengine.Orchestrator;
 import com.kevdev.taskmaster.R;
-
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Optional;
-import java.util.concurrent.CompletableFuture;
+
 
 public class AddTask extends AppCompatActivity {
     public static final String TAG = "AddTaskActivity";
-    public List<Team> teams = null;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_add_task);
 
-        Button submitButton = (Button) findViewById(R.id.submitNewTaskButton);
-        TextView confirmation = (TextView) findViewById(R.id.addTaskTextView);
+        Button submitButton = findViewById(R.id.submitNewTaskButton);
+
         Spinner taskStateSpinner = findViewById(R.id.addTaskSpinner);
         taskStateSpinner.setAdapter(new ArrayAdapter<>(
                 this,
@@ -72,9 +65,9 @@ public class AddTask extends AppCompatActivity {
         submitButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                EditText taskTitleEditText = (EditText) findViewById(R.id.taskTitle);
+                EditText taskTitleEditText = findViewById(R.id.taskTitle);
                 String taskTitle = taskTitleEditText.getText().toString();
-                EditText taskBodyEditText = (EditText) findViewById(R.id.taskBody);
+                EditText taskBodyEditText = findViewById(R.id.taskBody);
                 String taskBody = taskBodyEditText.getText().toString();
                 Spinner taskStateSpinner = findViewById(R.id.addTaskSpinner);
                 String nameOfSelectedTeam = taskTeamSpinner.getSelectedItem().toString();
