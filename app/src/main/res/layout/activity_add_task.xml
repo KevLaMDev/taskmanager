@@ -30,6 +30,7 @@
         android:layout_marginEnd="134dp"
         android:ems="10"
         android:inputType="textPersonName"
+        android:minHeight="48dp"
         android:text="Task Title"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
@@ -45,11 +46,13 @@
         android:layout_marginEnd="114dp"
         android:ems="10"
         android:inputType="textPersonName"
+        android:minHeight="48dp"
         android:text="Task Description"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/taskTitle" />
+        app:layout_constraintTop_toBottomOf="@+id/taskTitle"
+        android:autofillHints="" />
 
     <Button
         android:id="@+id/submitNewTaskButton"
@@ -67,19 +70,20 @@
     <Spinner
         android:id="@+id/addTaskSpinner"
         android:layout_width="233dp"
-        android:layout_height="46dp"
+        android:layout_height="48dp"
         android:layout_marginStart="68dp"
         android:layout_marginTop="44dp"
         android:layout_marginEnd="92dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/taskBody" />
+        app:layout_constraintTop_toBottomOf="@+id/taskBody"
+        tools:ignore="SpeakableTextPresentCheck" />
 
     <Spinner
         android:id="@+id/teamSpinner"
         android:layout_width="233dp"
-        android:layout_height="47dp"
+        android:layout_height="48dp"
         android:layout_marginStart="68dp"
         android:layout_marginTop="48dp"
         android:layout_marginEnd="92dp"
