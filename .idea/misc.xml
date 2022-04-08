@@ -5,9 +5,13 @@
       <map>
         <entry key="..\:/Users/Kevin LaMarca/AndroidStudioProjects/taskmaster/app/src/main/res/layout/activity_add_task.xml" value="0.25" />
         <entry key="..\:/Users/Kevin LaMarca/AndroidStudioProjects/taskmaster/app/src/main/res/layout/activity_all_tasks.xml" value="0.29257246376811596" />
+        <entry key="..\:/Users/Kevin LaMarca/AndroidStudioProjects/taskmaster/app/src/main/res/layout/activity_login.xml" value="0.33" />
+        <entry key="..\:/Users/Kevin LaMarca/AndroidStudioProjects/taskmaster/app/src/main/res/layout/activity_logout.xml" value="0.25" />
         <entry key="..\:/Users/Kevin LaMarca/AndroidStudioProjects/taskmaster/app/src/main/res/layout/activity_main.xml" value="0.25" />
         <entry key="..\:/Users/Kevin LaMarca/AndroidStudioProjects/taskmaster/app/src/main/res/layout/activity_settings.xml" value="0.27219202898550726" />
+        <entry key="..\:/Users/Kevin LaMarca/AndroidStudioProjects/taskmaster/app/src/main/res/layout/activity_sign_up.xml" value="0.33" />
         <entry key="..\:/Users/Kevin LaMarca/AndroidStudioProjects/taskmaster/app/src/main/res/layout/activity_task_detail.xml" value="0.27219202898550726" />
+        <entry key="..\:/Users/Kevin LaMarca/AndroidStudioProjects/taskmaster/app/src/main/res/layout/activity_verify_account.xml" value="0.25181159420289856" />
         <entry key="..\:/Users/Kevin LaMarca/AndroidStudioProjects/taskmaster/app/src/main/res/layout/fragment_main_activity.xml" value="0.25" />
       </map>
     </option>

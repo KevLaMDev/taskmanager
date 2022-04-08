@@ -38,3 +38,7 @@
 -4/5: 
     - Added team spinner in both settings and task creation activities to allow users to select a particular team to both filter and assign tasks.
     ![Filtered Tasks](screenshots/Screenshot_20220405_210246.png)
+-4/8:
+    - Added AWS cognito for user authentication
+    - Users can: signup, verify their email, and login to exists accounts
+    ![Main activity page showing current user email](screenshots/Screenshot_20220408_021524.png)

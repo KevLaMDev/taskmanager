@@ -15,6 +15,8 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.amplifyframework.api.graphql.model.ModelQuery;
+import com.amplifyframework.auth.AuthUserAttributeKey;
+import com.amplifyframework.auth.options.AuthSignUpOptions;
 import com.amplifyframework.core.Amplify;
 import com.amplifyframework.datastore.generated.model.Task;
 import com.kevdev.taskmaster.R;
@@ -63,6 +65,55 @@ public class MainActivity extends AppCompatActivity {
                     Log.i(TAG, "failure to READ tasks from DB");
                 }
         );
+        // start by manually creating a new user
+//        Amplify.Auth.signUp("lamarca.k@gmail.com",
+//                "totallySecureP@ssword",
+//                AuthSignUpOptions.builder()
+//                        .userAttribute(AuthUserAttributeKey.email(), "lamarca.k@gmail.com")
+//                        .userAttribute(AuthUserAttributeKey.nickname(), "Kev")
+//                        .build(),
+//                    good ->
+//                    {
+//                        Log.i(TAG, "Signup success: " + good.toString());
+//                    },
+//                    bad ->
+//                    {
+//                        Log.i(TAG, "signup failed");
+//                    }
+//        );
+        // Next we need to verify that user
+
+//        Amplify.Auth.confirmSignUp("lamarca.k@gmail.com",
+//                    "216580",
+//                    success ->
+//                    {
+//                        Log.i(TAG, "Verification success");
+//                    },
+//                    failure ->
+//                    {
+//                        Log.i(TAG, "Verification failed");
+//                    });
+        // Then log in as that user
+
+//        Amplify.Auth.signIn("lamarca.k@gmail.com",
+//                "totallySecureP@ssword",
+//                success ->
+//                {
+//                    Log.i(TAG, "Login success");
+//                },
+//                failure ->
+//                {
+//                    Log.i(TAG, "Login failed");
+//                }
+//        );
+
+        // Log out
+
+//        Amplify.Auth.signOut(
+//                () -> {Log.i(TAG, "Logout success"); },
+//                failure -> {Log.i(TAG, "Logout failed");}
+//        );
+
 //      DB proof of life:
 
 //        Team team1 =
@@ -102,6 +153,19 @@ public class MainActivity extends AppCompatActivity {
             e.printStackTrace();
         }
         setUpAddTaskActivity();
+        setUpLoginButton();
+        setUpLogOutButton();
+    }
+
+    private void setUpLoginButton() {
+        Button goToLoginActivityButton = findViewById(R.id.loginButton);
+        goToLoginActivityButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent goToLoginActivity = new Intent(MainActivity.this, LoginActivity.class);
+                startActivity(goToLoginActivity);
+            }
+        });
     }
 
     private void setUpSettingsButtonActivity() {
@@ -124,7 +188,23 @@ public class MainActivity extends AppCompatActivity {
                 startActivity(goToAddTaskForm);
             }
         });
+    }
 
+    private void setUpLogOutButton() {
+        Button logoutButton = findViewById(R.id.logoutButton);
+        logoutButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Amplify.Auth.signOut(
+                        () -> {
+                                Log.i(TAG, "Logout success");
+                                Intent goToLoginActivity = new Intent(MainActivity.this, LoginActivity.class);
+                                startActivity(goToLoginActivity);
+                              },
+                        failure -> {Log.i(TAG, "Logout failed");}
+                );
+            }
+        });
     }
 
     @Override
@@ -132,8 +212,14 @@ public class MainActivity extends AppCompatActivity {
         super.onResume();
 
         TextView mainPageHeader = findViewById(R.id.mainPageHeader);
-        dbTasks.clear();
         String teamName = preferences.getString(Settings.TEAM_TAG, "No team name");
+        mainPageHeader.setText(teamName + "\'s tasks");
+        TextView usernameTextView = findViewById(R.id.usernameTextView);
+        if (Amplify.Auth.getCurrentUser() != null) {
+            String username = Amplify.Auth.getCurrentUser().getUsername();
+            usernameTextView.setText(username);
+        }
+        dbTasks.clear();
         Amplify.API.query(
                 ModelQuery.list(Task.class),
                 success -> {
@@ -161,7 +247,6 @@ public class MainActivity extends AppCompatActivity {
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
-        mainPageHeader.setText(teamName + "\'s tasks");
     }
 
     private void setUpMainActivityRecyclerView() throws ExecutionException, InterruptedException {
