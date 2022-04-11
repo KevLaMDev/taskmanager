@@ -42,3 +42,7 @@
     - Added AWS cognito for user authentication
     - Users can: signup, verify their email, and login to exists accounts
     ![Main activity page showing current user email](screenshots/Screenshot_20220408_021524.png)
+-4/10:
+    - Added AWS S3 for image storing; Users can add can image to a task during creation
+    - task image shows in the task details activity:
+    ![add image in task creation](screenshots/addImageSC.png)

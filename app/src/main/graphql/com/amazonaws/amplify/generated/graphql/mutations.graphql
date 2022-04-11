@@ -8,18 +8,26 @@ mutation CreateTask(
     title
     body
     taskState
+    productImageS3Key
     teamId
     team {
       id
       name
       tasks {
         nextToken
+        startedAt
       }
       createdAt
       updatedAt
+      _version
+      _deleted
+      _lastChangedAt
     }
     createdAt
     updatedAt
+    _version
+    _deleted
+    _lastChangedAt
   }
 }
 mutation UpdateTask(
@@ -31,18 +39,26 @@ mutation UpdateTask(
     title
     body
     taskState
+    productImageS3Key
     teamId
     team {
       id
       name
       tasks {
         nextToken
+        startedAt
       }
       createdAt
       updatedAt
+      _version
+      _deleted
+      _lastChangedAt
     }
     createdAt
     updatedAt
+    _version
+    _deleted
+    _lastChangedAt
   }
 }
 mutation DeleteTask(
@@ -54,18 +70,26 @@ mutation DeleteTask(
     title
     body
     taskState
+    productImageS3Key
     teamId
     team {
       id
       name
       tasks {
         nextToken
+        startedAt
       }
       createdAt
       updatedAt
+      _version
+      _deleted
+      _lastChangedAt
     }
     createdAt
     updatedAt
+    _version
+    _deleted
+    _lastChangedAt
   }
 }
 mutation CreateTeam(
@@ -81,14 +105,22 @@ mutation CreateTeam(
         title
         body
         taskState
+        productImageS3Key
         teamId
         createdAt
         updatedAt
+        _version
+        _deleted
+        _lastChangedAt
       }
       nextToken
+      startedAt
     }
     createdAt
     updatedAt
+    _version
+    _deleted
+    _lastChangedAt
   }
 }
 mutation UpdateTeam(
@@ -104,14 +136,22 @@ mutation UpdateTeam(
         title
         body
         taskState
+        productImageS3Key
         teamId
         createdAt
         updatedAt
+        _version
+        _deleted
+        _lastChangedAt
       }
       nextToken
+      startedAt
     }
     createdAt
     updatedAt
+    _version
+    _deleted
+    _lastChangedAt
   }
 }
 mutation DeleteTeam(
@@ -127,13 +167,21 @@ mutation DeleteTeam(
         title
         body
         taskState
+        productImageS3Key
         teamId
         createdAt
         updatedAt
+        _version
+        _deleted
+        _lastChangedAt
       }
       nextToken
+      startedAt
     }
     createdAt
     updatedAt
+    _version
+    _deleted
+    _lastChangedAt
   }
 }

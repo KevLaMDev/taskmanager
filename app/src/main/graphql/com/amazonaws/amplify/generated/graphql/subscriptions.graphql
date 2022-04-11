@@ -5,18 +5,26 @@ subscription OnCreateTask {
     title
     body
     taskState
+    productImageS3Key
     teamId
     team {
       id
       name
       tasks {
         nextToken
+        startedAt
       }
       createdAt
       updatedAt
+      _version
+      _deleted
+      _lastChangedAt
     }
     createdAt
     updatedAt
+    _version
+    _deleted
+    _lastChangedAt
   }
 }
 subscription OnUpdateTask {
@@ -25,18 +33,26 @@ subscription OnUpdateTask {
     title
     body
     taskState
+    productImageS3Key
     teamId
     team {
       id
       name
       tasks {
         nextToken
+        startedAt
       }
       createdAt
       updatedAt
+      _version
+      _deleted
+      _lastChangedAt
     }
     createdAt
     updatedAt
+    _version
+    _deleted
+    _lastChangedAt
   }
 }
 subscription OnDeleteTask {
@@ -45,18 +61,26 @@ subscription OnDeleteTask {
     title
     body
     taskState
+    productImageS3Key
     teamId
     team {
       id
       name
       tasks {
         nextToken
+        startedAt
       }
       createdAt
       updatedAt
+      _version
+      _deleted
+      _lastChangedAt
     }
     createdAt
     updatedAt
+    _version
+    _deleted
+    _lastChangedAt
   }
 }
 subscription OnCreateTeam {
@@ -69,14 +93,22 @@ subscription OnCreateTeam {
         title
         body
         taskState
+        productImageS3Key
         teamId
         createdAt
         updatedAt
+        _version
+        _deleted
+        _lastChangedAt
       }
       nextToken
+      startedAt
     }
     createdAt
     updatedAt
+    _version
+    _deleted
+    _lastChangedAt
   }
 }
 subscription OnUpdateTeam {
@@ -89,14 +121,22 @@ subscription OnUpdateTeam {
         title
         body
         taskState
+        productImageS3Key
         teamId
         createdAt
         updatedAt
+        _version
+        _deleted
+        _lastChangedAt
       }
       nextToken
+      startedAt
     }
     createdAt
     updatedAt
+    _version
+    _deleted
+    _lastChangedAt
   }
 }
 subscription OnDeleteTeam {
@@ -109,13 +149,21 @@ subscription OnDeleteTeam {
         title
         body
         taskState
+        productImageS3Key
         teamId
         createdAt
         updatedAt
+        _version
+        _deleted
+        _lastChangedAt
       }
       nextToken
+      startedAt
     }
     createdAt
     updatedAt
+    _version
+    _deleted
+    _lastChangedAt
   }
 }
