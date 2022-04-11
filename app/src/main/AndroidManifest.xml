@@ -23,11 +23,12 @@
             android:name=".activities.Settings"
             android:exported="false" />
         <activity
-            android:name=".activities.TaskDetail"
+            android:name=".activities.TaskDetailActivity"
             android:exported="false" />
         <activity
             android:name=".activities.AddTask"
-            android:exported="false" />
+            android:exported="false">
+        </activity>
         <activity
             android:name=".activities.AllTasks"
             android:exported="false" />

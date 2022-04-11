@@ -11,16 +11,13 @@
         android:layout_width="177dp"
         android:layout_height="49dp"
         android:layout_marginStart="68dp"
-        android:layout_marginTop="190dp"
         android:layout_marginEnd="148dp"
-        android:layout_marginBottom="56dp"
         android:text="Add Task"
         android:textSize="24sp"
-        app:layout_constraintBottom_toTopOf="@+id/taskTitle"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        tools:layout_editor_absoluteY="118dp" />
 
     <EditText
         android:id="@+id/taskTitle"
@@ -35,7 +32,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        tools:layout_editor_absoluteY="295dp" />
+        tools:layout_editor_absoluteY="206dp" />
 
     <EditText
         android:id="@+id/taskBody"
@@ -60,7 +57,7 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="68dp"
         android:layout_marginEnd="216dp"
-        android:layout_marginBottom="80dp"
+        android:layout_marginBottom="48dp"
         android:text="ADD TASK"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
@@ -90,6 +87,23 @@
         android:layout_marginBottom="87dp"
         app:layout_constraintBottom_toTopOf="@+id/submitNewTaskButton"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/addTaskSpinner" />
+        app:layout_constraintTop_toBottomOf="@+id/addTaskSpinner"
+        app:layout_constraintVertical_bias="0.0" />
+
+    <Button
+        android:id="@+id/addImageButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="68dp"
+        android:layout_marginTop="69dp"
+        android:layout_marginEnd="229dp"
+        android:layout_marginBottom="82dp"
+        android:text="Add Image"
+        app:layout_constraintBottom_toTopOf="@+id/submitNewTaskButton"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/teamSpinner" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>
