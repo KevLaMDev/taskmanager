@@ -14,6 +14,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.amplifyframework.analytics.AnalyticsEvent;
 import com.amplifyframework.api.graphql.model.ModelQuery;
 import com.amplifyframework.auth.AuthUserAttributeKey;
 import com.amplifyframework.auth.options.AuthSignUpOptions;
@@ -28,6 +29,7 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.Date;
 import java.util.List;
 import java.util.concurrent.CompletableFuture;
 import java.util.concurrent.ExecutionException;
@@ -71,7 +73,12 @@ public class MainActivity extends AppCompatActivity {
                 }
         );
 
-//        
+        AnalyticsEvent event = AnalyticsEvent.builder()
+                .name("openedApp")
+                .addProperty("timeOpened", Long.toString(new Date().getTime()))
+                .addProperty("eventDescription", "Opened MainActivity")
+                .build();
+        Amplify.Analytics.recordEvent(event);
 
         setUpSettingsButtonActivity();
         try {
@@ -170,6 +177,14 @@ public class MainActivity extends AppCompatActivity {
                     Log.i(TAG, "failure to READ tasks from DB");
                 }
         );
+
+        AnalyticsEvent event = AnalyticsEvent.builder()
+                .name("resumedMainActivity")
+                .addProperty("timeResumed", Long.toString(new Date().getTime()))
+                .addProperty("eventDescription", "Resumed MainActivity")
+                .build();
+        Amplify.Analytics.recordEvent(event);
+
         try {
             setUpMainActivityRecyclerView();
         } catch (ExecutionException e) {

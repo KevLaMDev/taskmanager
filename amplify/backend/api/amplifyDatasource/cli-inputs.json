@@ -7,25 +7,7 @@
       "expirationTime": 7,
       "keyDescription": ""
     },
-    "conflictResolution": {
-      "defaultResolutionStrategy": {
-        "type": "AUTOMERGE"
-      },
-      "perModelResolutionStrategy": [
-        {
-          "resolutionStrategy": {
-            "type": "AUTOMERGE"
-          },
-          "entityName": "Task"
-        },
-        {
-          "resolutionStrategy": {
-            "type": "AUTOMERGE"
-          },
-          "entityName": "Team"
-        }
-      ]
-    },
+    "conflictResolution": {},
     "apiName": "amplifyDatasource",
     "gqlSchemaPath": "C:\\Users\\Kevin LaMarca\\AndroidStudioProjects\\taskmaster\\amplify\\backend\\api\\amplifyDatasource\\schema.graphql"
   }
