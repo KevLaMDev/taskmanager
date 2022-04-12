@@ -43,9 +43,24 @@ public class AddTask extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_add_task);
         activityResultLauncher = getImageSelectionActivityResultLauncher();
+
+        Intent callingIntent = getIntent();
+        if ((callingIntent != null) && (callingIntent.getType() != null) && (callingIntent.getType().startsWith("image"))) {
+            Uri externalImageFileUri = callingIntent.getParcelableExtra(Intent.EXTRA_STREAM);
+            if (externalImageFileUri != null) {
+                InputStream externalImageInputStream = null;
+                try {
+                    externalImageInputStream = getContentResolver().openInputStream(externalImageFileUri);
+                } catch(FileNotFoundException fnfe) {
+                    Log.e(TAG, "Could not get file stream from URI" + fnfe.getMessage(), fnfe);
+                }
+                String selectedImageFileName = getFileNameFromUri(externalImageFileUri);
+                uploadInputStreamToS3(externalImageInputStream, selectedImageFileName);
+            }
+        }
+
         setUpAddImageButton();
         Button submitButton = findViewById(R.id.submitNewTaskButton);
-
         Spinner taskStateSpinner = findViewById(R.id.addTaskSpinner);
         taskStateSpinner.setAdapter(new ArrayAdapter<>(
                 this,

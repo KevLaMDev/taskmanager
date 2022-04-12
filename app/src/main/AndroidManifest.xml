@@ -24,10 +24,16 @@
             android:exported="false" />
         <activity
             android:name=".activities.TaskDetailActivity"
-            android:exported="false" />
+            android:exported="false">
+        </activity>
         <activity
             android:name=".activities.AddTask"
-            android:exported="false">
+            android:exported="true">
+            <intent-filter android:label="Grab image for new product">
+                <action android:name="android.intent.action.SEND" /> <!-- this will allow our activity to process this external intent -->
+                <category android:name="andorid.intent.category.DEFAULT" /> <!-- this is needed for all implicit intents -->
+                <data android:mimeType="image/*" />
+            </intent-filter>
         </activity>
         <activity
             android:name=".activities.AllTasks"

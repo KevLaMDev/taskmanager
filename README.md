@@ -46,3 +46,6 @@
     - Added AWS S3 for image storing; Users can add can image to a task during creation
     - task image shows in the task details activity:
     ![add image in task creation](screenshots/addImageSC.png)
+-4/11: 
+    - Added external calling intent to allow users to open the taskmaster app from another app
+    - When opened from another app, the taskmaster app will have automatically populated task file image field
