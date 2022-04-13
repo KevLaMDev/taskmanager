@@ -6,20 +6,37 @@
     android:layout_height="match_parent"
     tools:context=".activities.MainActivity">
 
+    <com.google.android.gms.ads.AdView
+        android:id="@+id/bannerAdView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginStart="36dp"
+        android:layout_marginTop="35dp"
+        android:layout_marginEnd="37dp"
+        android:layout_marginBottom="76dp"
+        app:adSize="BANNER"
+        app:adUnitId="ca-app-pub-3940256099942544/6300978111"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/interstitialAdButton" />
+
     <TextView
         android:id="@+id/mainPageHeader"
-        android:layout_width="196dp"
-        android:layout_height="74dp"
-        android:layout_marginStart="38dp"
-        android:layout_marginTop="103dp"
-        android:layout_marginEnd="212dp"
-        android:layout_marginBottom="52dp"
+        android:layout_width="330dp"
+        android:layout_height="75dp"
+        android:layout_marginStart="28dp"
+        android:layout_marginTop="56dp"
+        android:layout_marginEnd="34dp"
         android:text="@string/my_tasks"
         android:textSize="24sp"
-        app:layout_constraintBottom_toTopOf="@+id/mainPageRecycleView"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/logoutButton" />
+        app:layout_constraintTop_toBottomOf="@+id/loginButton" />
 
     <ImageButton
         android:id="@+id/settingsNavButton"
@@ -33,28 +50,28 @@
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/mainPageRecycleView"
-        android:layout_width="215dp"
-        android:layout_height="324dp"
+        android:layout_width="222dp"
+        android:layout_height="207dp"
         android:layout_marginStart="88dp"
+        android:layout_marginTop="16dp"
         android:layout_marginEnd="94dp"
-        android:layout_marginBottom="56dp"
-        app:layout_constraintBottom_toTopOf="@+id/addTaskNavButton"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="parent" />
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/mainPageHeader" />
 
     <Button
         android:id="@+id/addTaskNavButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="36dp"
+        android:layout_marginTop="20dp"
         android:layout_marginEnd="248dp"
-        android:layout_marginBottom="96dp"
         android:text="ADD TASK"
-        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="parent" />
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/mainPageRecycleView" />
 
     <Button
         android:id="@+id/logoutButton"
@@ -72,10 +89,8 @@
         android:id="@+id/loginButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="29dp"
-        android:layout_marginBottom="55dp"
+        android:layout_marginStart="28dp"
         android:text="Login"
-        app:layout_constraintBottom_toTopOf="@+id/mainPageHeader"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/logoutButton" />
 
@@ -87,5 +102,35 @@
         android:layout_marginTop="34dp"
         app:layout_constraintStart_toEndOf="@+id/logoutButton"
         app:layout_constraintTop_toTopOf="parent" />
+
+    <Button
+        android:id="@+id/interstitialAdButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="36dp"
+        android:layout_marginTop="12dp"
+        android:text="Interstital Ad"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/addTaskNavButton" />
+
+    <Button
+        android:id="@+id/rewardAdButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="48dp"
+        android:layout_marginTop="83dp"
+        android:layout_marginEnd="41dp"
+        android:text="Reward Ad"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toEndOf="@+id/interstitialAdButton"
+        app:layout_constraintTop_toBottomOf="@+id/mainPageRecycleView" />
+
+    <TextView
+        android:id="@+id/rewardsTextView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        tools:layout_editor_absoluteX="135dp"
+        tools:layout_editor_absoluteY="83dp" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
