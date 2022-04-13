@@ -49,3 +49,9 @@
 -4/11: 
     - Added external calling intent to allow users to open the taskmaster app from another app
     - When opened from another app, the taskmaster app will have automatically populated task file image field
+-4/12:
+    - Added AWS analytics
+    - Added AWS text to speech functionality
+    - Added AWS translate functionality
+    ![image of translated french](screenshots/frenchTranslation.png)
+    ![image of AWS analytics](screenshots/awsPinpointAnalytics.png)

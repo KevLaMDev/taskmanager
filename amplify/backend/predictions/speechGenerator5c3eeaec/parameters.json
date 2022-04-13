@@ -1,0 +1,14 @@
+{
+    "resourceName": "speechGenerator5c3eeaec",
+    "convertPolicyName": "speechGeneratorPolicy5c3eeaec",
+    "authRoleName": {
+        "Ref": "AuthRoleName"
+    },
+    "unauthRoleName": {
+        "Ref": "UnauthRoleName"
+    },
+    "convertType": "speechGenerator",
+    "language": "en-US",
+    "voice": "Justin",
+    "access": "authAndGuest"
+}
