@@ -1,5 +1,6 @@
 package com.kevdev.taskmaster.activities;
 
+import android.app.Activity;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
@@ -10,6 +11,7 @@ import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.TextView;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -20,6 +22,20 @@ import com.amplifyframework.auth.AuthUserAttributeKey;
 import com.amplifyframework.auth.options.AuthSignUpOptions;
 import com.amplifyframework.core.Amplify;
 import com.amplifyframework.datastore.generated.model.Task;
+import com.google.android.gms.ads.AdError;
+import com.google.android.gms.ads.AdRequest;
+import com.google.android.gms.ads.AdView;
+import com.google.android.gms.ads.FullScreenContentCallback;
+import com.google.android.gms.ads.LoadAdError;
+import com.google.android.gms.ads.MobileAds;
+import com.google.android.gms.ads.OnUserEarnedRewardListener;
+import com.google.android.gms.ads.initialization.InitializationStatus;
+import com.google.android.gms.ads.initialization.OnInitializationCompleteListener;
+import com.google.android.gms.ads.interstitial.InterstitialAd;
+import com.google.android.gms.ads.interstitial.InterstitialAdLoadCallback;
+import com.google.android.gms.ads.rewarded.RewardItem;
+import com.google.android.gms.ads.rewarded.RewardedAd;
+import com.google.android.gms.ads.rewarded.RewardedAdLoadCallback;
 import com.kevdev.taskmaster.R;
 import com.kevdev.taskmaster.adapters.MainActivityRecyclerViewAdapter;
 
@@ -40,6 +56,10 @@ public class MainActivity extends AppCompatActivity {
     public static final String TASK_BODY_EXTRA_TAG = "taskBody";
     public static final String TASK_IMAGES3_EXTRA_TAG = "imageS3Key";
     public static final String TAG = "MainActivity";
+    private InterstitialAd mInterstitialAd = null;
+    private RewardedAd mRewardedAd = null;
+    private int userRewardPoints = 0;
+
     SharedPreferences preferences;
     MainActivityRecyclerViewAdapter adapter;
     CompletableFuture<List<Task>> taskCompletableFuture = null;
@@ -52,6 +72,8 @@ public class MainActivity extends AppCompatActivity {
         preferences = PreferenceManager.getDefaultSharedPreferences(this);
         taskCompletableFuture = new CompletableFuture<>();
         String teamName = preferences.getString(Settings.TEAM_TAG, "No team name");
+        TextView rewardTextView = findViewById(R.id.rewardsTextView);
+        rewardTextView.setText("Reward Points: " + userRewardPoints);
         Amplify.API.query(
                 ModelQuery.list(Task.class),
                 success -> {
@@ -73,6 +95,7 @@ public class MainActivity extends AppCompatActivity {
                 }
         );
 
+
         AnalyticsEvent event = AnalyticsEvent.builder()
                 .name("openedApp")
                 .addProperty("timeOpened", Long.toString(new Date().getTime()))
@@ -88,9 +111,104 @@ public class MainActivity extends AppCompatActivity {
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
+        setUpAds();
         setUpAddTaskActivity();
         setUpLoginButton();
         setUpLogOutButton();
+    }
+
+    private void setUpAds() {
+
+        MobileAds.initialize(this, new OnInitializationCompleteListener() {
+            @Override
+            public void onInitializationComplete(InitializationStatus initializationStatus) {
+            }
+        });
+
+        AdView bannerAdView = (AdView) findViewById(R.id.bannerAdView);
+        AdRequest adR = new AdRequest.Builder().build();
+        bannerAdView.loadAd(adR);
+
+        AdRequest adRequestInterstitialAd = new AdRequest.Builder().build();
+        InterstitialAd.load(this,"ca-app-pub-3940256099942544/1033173712", adRequestInterstitialAd,
+                new InterstitialAdLoadCallback() {
+                    @Override
+                    public void onAdLoaded(@NonNull InterstitialAd interstitialAd) {
+                        // The mInterstitialAd reference will be null until
+                        // an ad is loaded.
+                        mInterstitialAd = interstitialAd;
+                        Log.i(TAG, "onAdLoaded");
+                    }
+
+                    @Override
+                    public void onAdFailedToLoad(@NonNull LoadAdError loadAdError) {
+                        // Handle the error
+                        Log.i(TAG, loadAdError.getMessage());
+                        mInterstitialAd = null;
+                    }
+                });
+        Button interstitialAdButton = (Button) findViewById(R.id.interstitialAdButton);
+        interstitialAdButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if (mInterstitialAd != null) mInterstitialAd.show(MainActivity.this);
+            }
+        });
+
+        AdRequest rewardAdRequest = new AdRequest.Builder().build();
+        RewardedAd.load(this, "ca-app-pub-5610459448820556/3125702073",
+                rewardAdRequest, new RewardedAdLoadCallback() {
+                    @Override
+                    public void onAdFailedToLoad(@NonNull LoadAdError loadAdError) {
+                        // Handle the error.
+                        Log.d(TAG, loadAdError.getMessage());
+                        mRewardedAd = null;
+                    }
+
+                    @Override
+                    public void onAdLoaded(@NonNull RewardedAd rewardedAd) {
+                        mRewardedAd = rewardedAd;
+                        Log.d(TAG, "Ad was loaded.");
+                        mRewardedAd.setFullScreenContentCallback(new FullScreenContentCallback() {
+                            @Override
+                            public void onAdShowedFullScreenContent() {
+                                // Called when ad is shown.
+                                Log.d(TAG, "Ad was shown.");
+                            }
+
+                            @Override
+                            public void onAdFailedToShowFullScreenContent(AdError adError) {
+                                // Called when ad fails to show.
+                                Log.d(TAG, "Ad failed to show.");
+                            }
+
+                            @Override
+                            public void onAdDismissedFullScreenContent() {
+                                // Called when ad is dismissed.
+                                // Set the ad reference to null so you don't show the ad a second time.
+                                Log.d(TAG, "Ad was dismissed.");
+                                mRewardedAd = null;
+                            }
+                        });
+                    }
+                });
+
+        Button rewardAdButton = findViewById(R.id.rewardAdButton);
+        rewardAdButton.setOnClickListener(b -> {
+            if (mRewardedAd != null) {
+                mRewardedAd.show(MainActivity.this, new OnUserEarnedRewardListener() {
+                    @Override
+                    public void onUserEarnedReward(@NonNull RewardItem rewardItem) {
+                        // Handle the reward.
+                        int rewardAmount = rewardItem.getAmount();
+                        String rewardType = rewardItem.getType();
+                        Log.d(TAG, "The user earned the reward. Amount is: " + rewardAmount + ", and type is: " + rewardType);
+                    }
+                });
+            } else {
+                Log.d(TAG, "The rewarded ad wasn't ready yet.");
+            }
+        });
     }
 
 
@@ -147,7 +265,8 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onResume() {
         super.onResume();
-
+        TextView rewardTextView = findViewById(R.id.rewardsTextView);
+        rewardTextView.setText("Reward Points: " + userRewardPoints);
         TextView mainPageHeader = findViewById(R.id.mainPageHeader);
         String teamName = preferences.getString(Settings.TEAM_TAG, "No team name");
         mainPageHeader.setText(teamName + "\'s tasks");
