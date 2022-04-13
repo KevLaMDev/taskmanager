@@ -10,40 +10,66 @@
         android:id="@+id/taskDetailHeader"
         android:layout_width="175dp"
         android:layout_height="38dp"
-        android:layout_marginStart="75dp"
-        android:layout_marginTop="124dp"
-        android:layout_marginEnd="143dp"
+        android:layout_marginStart="70dp"
+        android:layout_marginTop="65dp"
+        android:layout_marginEnd="148dp"
         android:text="placeholder"
         android:textSize="20sp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toBottomOf="@+id/taskImage" />
 
     <TextView
         android:id="@+id/taskDetailDescription"
         android:layout_width="256dp"
         android:layout_height="59dp"
         android:layout_marginStart="75dp"
+        android:layout_marginTop="37dp"
         android:layout_marginEnd="76dp"
-        android:layout_marginBottom="299dp"
         android:text="TextView"
-        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="parent" />
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/taskDetailHeader" />
 
     <ImageView
         android:id="@+id/taskImage"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="124dp"
-        android:layout_marginTop="65dp"
+        android:layout_marginTop="180dp"
         android:layout_marginEnd="141dp"
-        android:layout_marginBottom="116dp"
-        app:layout_constraintBottom_toTopOf="@+id/taskDetailDescription"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/taskDetailHeader"
+        app:layout_constraintTop_toTopOf="parent"
         tools:srcCompat="@tools:sample/avatars" />
+
+    <Button
+        android:id="@+id/speakTaskButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="68dp"
+        android:layout_marginTop="44dp"
+        android:layout_marginEnd="229dp"
+        android:text="Tap to Hear"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.435"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/taskDetailDescription" />
+
+    <Button
+        android:id="@+id/translateButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="51dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="127dp"
+        android:layout_marginBottom="174dp"
+        android:text="Translate to French"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/speakTaskButton" />
 </androidx.constraintlayout.widget.ConstraintLayout>
